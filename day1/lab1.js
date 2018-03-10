@@ -1,12 +1,22 @@
 let num1 = 1
 let num2 = "2"
 
-func1(num1,num2)
-rtrcall(func1(num1,num2))
-function func1(inp1 , inp2){
-    return inp+inp2
+
+let test = function(){
+    return 1
 }
 
-function rtrcall(callbackfunction){
-    return callbackfunction()
+console.log(func1(num1,num2));
+
+console.log(rtrcall(test));
+
+
+function func1(inp1 , inp2){
+    return inp1+inp2
 }
+
+function rtrcall(callbackFunction){
+    return callbackFunction()
+}
+
+
