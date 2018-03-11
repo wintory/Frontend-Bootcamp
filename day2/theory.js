@@ -47,7 +47,7 @@ console.log(variable2); // prints foo
 
 //Declaring Variables Shorthand
 let xx = 123,
-    yy = "I'm string",
+    yy = "I'm strin",
     zz = [1,2,3];
 
 // ---------------------
