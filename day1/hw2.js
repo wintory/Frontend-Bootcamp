@@ -23,4 +23,3 @@ function deleteCompany(prop){
     
 
 console.log(deleteCompany(peopleSalary));
-
