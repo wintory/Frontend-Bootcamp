@@ -1,0 +1,29 @@
+.hello {
+    background-color: yellow;
+}
+
+.purple {
+    background-color: rgb(216, 211, 191);
+    padding: 10%;
+    border: 5px solid wheat;
+}
+
+div {
+    color: black
+}
+
+.hdr {
+    margin-left: 5%;
+}
+
+a {
+    color: white;
+}
+
+.mg {
+    margin-top: 2%;
+}
+
+.tp {
+    background-color: transparent;
+}

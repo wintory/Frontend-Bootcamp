@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="./styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <title>Homework1</title>
 </head>
 
@@ -23,30 +24,23 @@
                 <form action="hw3-1.html">
                     <div class="form-group ">
                         <p>email</p>
-                        <input class="form-control is-valid" type="text" name="email" placeholder="email" value="aaa@mail.com" required>
-                        <div class="valid-feedback">
-                            valid email
+                        <input class="form-control" type="text" id="email" placeholder="email" value="" required>
+                        <div id="validemail">
+                            <p></p>
                         </div>
                     </div>
                     <div class="form-group ">
                         <p>password</p>
-                        <input class="form-control is-invalid" type="password" name="password" placeholder="password" required>
-                        <div class="invalid-feedback">
-                            Please enter password
+                        <input class="form-control " type="password" id="password" placeholder="password" value="" required>
+                        <div id="validpassword">
+                            <p></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <p>name</p>
-                        <input class="form-control is-invalid" type="text" name="name" placeholder="full name" required>
-                        <div class="invalid-feedback">
-                            Please enter name
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <p>birth date</p>
-                        <input class="form-control is-invalid" type="date" name="birthday" required>
-                        <div class="invalid-feedback">
-                            Please enter birth date
+                        <input class="form-control" type="text" id="name" placeholder="full name" value="" required>
+                        <div id="validname">
+                            <p></p>
                         </div>
                     </div>
                     <br>
@@ -55,6 +49,84 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(function () {
+
+            $('#email').click(function () {
+                var email = $('#email').val();
+                if (email === "") {
+                    $('#email').css('border-color', 'red');
+                    $('#validemail').html('please enter email').css('color', 'red');
+
+                }
+            })
+
+            $('#name').click(function () {
+                var name = $('#name').val();
+                if (name === "") {
+                    $('#name').css('border-color', 'red');
+                    $('#validname').html('please enter name').css('color', 'red');
+
+                }
+            })
+
+            $('#password').click(function () {
+                var password = $('#password').val();
+                if (password === "") {
+                    $('#password').css('border-color', 'red');
+                    $('#validpassword').html('please enter password').css('color', 'red');
+
+                }
+            })
+
+            $('#email').keydown(function () {
+                var email = $('#email').val();
+                if (email === "") {
+                    $('#email').css('border-color', 'red');
+                    $('#validemail').html('please enter email').css('color', 'red');
+
+                } else if (email.indexOf("@") > 0 && email.indexOf(".") > 0) {
+                    $('#email').css('border-color', 'green');
+                    $('#validemail').html('valid email').css('color', 'green');
+                } else {
+                    $('#email').css('border-color', 'red');
+                    $('#validemail').html('invalid email').css('color', 'red');
+                }
+            })
+
+            $('#name').keydown(function () {
+                var name = $('#name').val();
+                if (name === "") {
+                    $('#name').css('border-color', 'red');
+                    $('#validname').html('please enter name').css('color', 'red');
+
+                } else if (name === "") {
+                    $('#name').css('border-color', 'red');
+                    $('#validname').html('invalid name').css('color', 'red');
+                } else {
+                    $('#name').css('border-color', 'green');
+                    $('#validname').html('valid name').css('color', 'green');
+                }
+            })
+
+            $('#password').keydown(function () {
+                var password = $('#password').val();
+                if (password === "") {
+                    $('#password').css('border-color', 'red');
+                    $('#validpassword').html('please enter password').css('color', 'red');
+
+                } else if (password.length <= 6) {
+                    $('#password').css('border-color', 'red');
+                    $('#validpassword').html('password must be more than 6 chars').css('color', 'red');
+                } else {
+                    $('#password').css('border-color', 'green');
+                    $('#validpassword').html('valid passowrd').css('color', 'green');
+                }
+            })
+
+        })
+    </script>
 </body>
 
 
