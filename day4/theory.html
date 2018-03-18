@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <span id="title"></span>
+
+    <p>
+        <span class="first">aaa</span>
+        <br>
+        <span class="rm">remove this</span>
+    </p>
+
+    <input type="text" id="txtName" placeholder="Input your name">
+
+    <button id="btnOK2">click me</button>
+
+    <button id="btnOK">promise</button>
+
+    <button id="btnOK3">fetch</button>
+
+
+    <button id="btnOK4">fetch with promise all</button>
+
+    <button id="remove">remove item</button>
+
+    <button id="fetch">get ajax data</button>
+
+
+    <button id="postt">post ajax data</button>
+
+    <button id="foreach">get table data</button>
+
+    <div id="result">
+
+    </div>
+
+    <div id="ajaxresult">
+
+    </div>
+
+    <div id="result2">
+
+    </div>
+    <br>
+    <br>
+    <table id="tableb">
+        <tr>
+            <th>ID</th>
+            <th>FILM</th>
+        </tr>
+    </table>
+    <script>
+        $(function () {
+            $('#title').html("hello <b>world</b>");
+            $('p span.first').css('color', 'red');
+
+            $('#btnOK').click(onClick);
+
+            function onClick() {
+                alert('now ' + new Date());
+                $('#title').html("<b>Hello please click me</b>")
+                $('#result').append(`<br>${new Date()}<br>`)
+                $(`<p>${new Date()}</p>`).appendTo('#result')
+            }
+
+            $('#remove').click(function () {
+                $('p span.rm').remove()
+            })
+
+            $('#fetch').click(function () {
+
+                $.get('https://swapi.co/api/people/1').then(function (res) {
+                    $('#result').append('<br>name: ' + res.name + '<br>');
+                    $('#result').append("gender:" + res.gender);
+                });
+
+            });
+
+            //fetch data
+
+            $('#postt').click(function () {
+                $.post('https://httpbin.org/post', {
+                    name: $("#txtName").val()
+                }).then(function (res) {
+                    $("#result2").html(`Hello <b>${res.form.name}</b>`);
+                });
+            });
+
+            //each function
+
+            $('#foreach').click(function () {
+                $.get('https://swapi.co/api/people/1').then(function (res) {
+                    $.each(res.films, function (index, value) {
+                        $('table#tableb').append(
+                            `<tr><td>${index}</td><td>${value}</td></tr>`);
+
+                    })
+                });
+            })
+
+            //promise
+
+            $('#btnOK2').click(function () {
+                var people1 = fetch('https://swapi.co/api/people/1')
+                    .then(function (res) {
+                        return res.json()
+                    });
+                var people2 = fetch('https://swapi.co/api/people/2')
+                    .then(function (res) {
+                        return res.json()
+                    });
+                Promise.all([people1, people2]).then(function (res) {
+                    $('#result').append("name 1:" + res[0].name);
+                    $('#result').append("<br>name 2:" + res[1].name);
+                });
+            });
+
+            //fetch
+            $('#btnOK3').click(function () {
+                fetch('https://swapi.co/api/people/1')
+                    .then(function (res) {
+                        return res.json()
+                    }).then(function (obj) {
+                        console.log(obj);
+
+                    })
+
+            });
+
+            //fetch with promise all
+
+            $('#btnOK4').click(function () {
+                var people1 = fetch('https://swapi.co/api/people/1')
+                    .then(function (res) {
+                        return res.json()
+                    });
+                var people2 = fetch('https://swapi.co/api/people/2')
+                    .then(function (res) {
+                        return res.json()
+                    });
+
+                var people3 = fetch('https://swapi.co/api/people/3').then(function (res) {
+                    return res.json()
+                })
+
+                Promise.all([people1, people2, people3]).then(function (res) {
+                    $('#result').append("name 1:" + res[0].name);
+                    $('#result').append("<br>name 2:" + res[1].name);
+                    $('#result').append("<br>name 3:" + res[2].name);
+                });
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>
