@@ -8,31 +8,18 @@
   <link rel="stylesheet" href="./chat.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
   <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="moment.js"></script>
   <title>Hw4-2 Chat</title>
 </head>
 
 <body>
 
   <div class='container' ng-cloak ng-app="chatApp">
-    <h1>chat app</h1>
+    <h1>Hw4-2 Chat</h1>
     <div class='chatbox' ng-controller="MessageCtrl as chatMessage">
       <div class='chatbox__user-list'>
-        <h1>Friends Online</h1>
-        <div class='chatbox__user--active'>
-          <p>Maelyn Pepe</p>
-        </div>
-        <div class='chatbox__user--busy'>
-          <p>Michelle Pepe</p>
-        </div>
-        <div class='chatbox__user--active'>
-          <p>Amy Angular</p>
-        </div>
-        <div class='chatbox__user--active'>
-          <p>Jack Uniden</p>
-        </div>
-        <div class='chatbox__user--away'>
-          <p>Ben Marcus</p>
-        </div>
+        <h1></h1>
+
       </div>
 
 
@@ -41,17 +28,19 @@
 
       </div>
 
+      <div style="margin-top:5%;">
+        <div class="col-md-4">
+          <input style="background-color:transparent;color:white;" type="text" placeholder="your name" id="name" required>
+        </div>
+        <br>
+        <div class="col-md-4">
+          <input style="background-color:transparent;color:white;" type="text" placeholder="message" id="message" required>
+        </div>
+        <br>
+        <div class="col-md-4">
+          <input style="background-color:transparent;color:white;" type="button" value="send" onclick="send()">
+        </div>
 
-      <div class="col-md-4">
-        <input type="text" placeholder="your name" id="name" required>
-      </div>
-      <br>
-      <div class="col-md-4">
-        <input type="text" placeholder="message" id="message" required>
-      </div>
-      <br>
-      <div class="col-md-4">
-        <input type="button" value="send" onclick="send()">
       </div>
 
     </div>
@@ -76,7 +65,15 @@
           name: $("#name").val(),
           message: $("#message").val()
         });
+        $("#chat").animate({
+          scrollTop: $(document).height()
+        }, 10);
       }
+
+      $("#chat").animate({
+        scrollTop: $(document).height()
+      }, 10);
+
       chatRef.limitToLast(10).on("child_added", function (data) {
         msgData = data.val();
         $("#chat").append(
