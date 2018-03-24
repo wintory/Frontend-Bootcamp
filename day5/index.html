@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="moment.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Kanit" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Indie Flower', cursive;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        span {
+            color: var(--blue);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>hello สวัสดี</h1>
+    <button id="bbtn">
+        <span> get highlight</span>
+    </button>
+    <button id="btnLoad">load</button>
+
+    <script>
+        $(function () {
+
+            $.fn.highlight = function () {
+                $(this).css('color', 'yellow');
+                return this;
+            };
+
+
+            $('#bttn').click(function () {
+                $('span')
+                    .highlight()
+            });
+
+            (function ($) {
+                $.fn.async = function (asyncText, promise) {
+                    var host = this;
+                    var originalHtml = $(host).html();
+                    $(host).html(asyncText).prop('disabled', true);
+                    promise.then(function (res) {
+                        $(host).html(originalHtml).prop('disabled', false);
+                    });
+                    return promise;
+                };
+            })(jQuery);
+
+            $('#btnLoad').click(function () {
+                var promise = $.get('https://jsonplaceholder.typicode.com/posts');
+                $(this).async('<i class="fa fa-refresh fa-spin  fa-fw"></i> Loading', promise).then(
+                    function (result) {
+                        console.log(result);
+                    });
+            });
+
+        })
+
+
+
+        //สร้าง intermeda invoking ประกาศตัวแปรในหแนยำไม่ให้ซ้ำ
+        /*(function ($) {
+
+             plugin scope
+
+            $.fn.highlight = function () {
+                $(this).css('color', 'yellow');
+                return this;
+            };
+
+        })(jQuery);*/
+    </script>
+</body>
+
+</html>
