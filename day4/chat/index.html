@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Firebase Chat</title>
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
     <script src='https://cdn.firebase.com/js/client/2.4.0/firebase.js'></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 
 <body>
@@ -18,7 +17,7 @@
     <br/>
     <div id="results"></div>
     <script>
-        var myFirebase = new Firebase('https://FIREBASE-PROJECTID.firebaseio.com/');
+        var myFirebase = new Firebase('https://chat-25d2d.firebaseapp.com');
         var usernameInput = document.querySelector('#username');
         var textInput = document.querySelector('#text');
         var postButton = document.querySelector('#post');
