@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <title>Hello React</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/javascript">
+    //ไม่ใช้รูปแบบนี้ ใช้jsxแทน
+    const helloReact = React.createElement(
+      'div',
+      null,
+      React.createElement('p', null, 'p in div', React.createElement('span', null, ' this is span'))
+    );
+
+    let div2 = React.createElement('div', null, 'div2')
+    let ptag = React.createElement('p', null, 'this is tag p')
+
+    ReactDOM.render([helloReact, div2], document.getElementById('root'));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>Hello React</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+              let arr = [1,2,3,4,5] 
+              let thistrue = true
+              let chk = 'this is if'
+              let msg = 'hello react'
+              let nav = React.createElement('nav',null,'this is navbar')
+              let sum = (re)=>{
+                return re*2
+              }
+
+              let Comp = ()=>{
+                return (<span style={{color:'red'}}>function component</span>)
+              }
+
+              ReactDOM.render(
+              <div>
+                {nav}
+                <h1 style={{color:'green'}}>Hello</h1>
+                <p>{msg}</p>
+                <p>arr = {arr}</p>
+                <div>
+                  <p>arr*2 = {arr.map(sum)}</p>
+                </div>
+                <p>{thistrue ? "thistrue = true" : "thistrue = false"}</p>
+                <p>{chk && "true chk"}</p>
+
+                <p>result null :</p><p>{null}</p>
+                <p>result false :</p><p>{false}</p>
+                <Comp/>
+              </div>
+              , document.getElementById('root'));
+            </script>
+</body>
+
+</html>
