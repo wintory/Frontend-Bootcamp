@@ -11,7 +11,7 @@ class Navbar extends Component {
     componentDidMount() {
         const url = 'https://swapi.co/api/people/1/'
         axios
-            .get(`https://jsonplaceholder.typicode.com/users`)
+            .get(url)
             .then(res => {
                 const persons = res.data;
                 this.setState({persons: persons});
@@ -27,23 +27,23 @@ class Navbar extends Component {
                 <img
                     src="http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo.png"
                     style={{
-                    width: 100,
+                    width: 120,
                     height: 80
-                }}/>
-                <button className="btn btn-light">Be come a host</button>
-                <button className="btn btn-light">Saved</button>
-                <button className="btn btn-light">Trip</button>
-                <button className="btn btn-light">Message</button>
-                <button className="btn btn-light">Help</button>
-                {this
-                    .state
-                    .persons
-                    .map(persons =>< p > {
-                        persons.id
-                    } < /p>)}
-                <img style={{
-                    borderRadius: 50
-                }} src=""/>
+                }}
+                    className="col-md-1"/>
+                <button className="btn btn-light col-md-1 offset-4">Become host</button>
+                <button className="btn btn-light col-md-1">Saved</button>
+                <button className="btn btn-light col-md-1">Trip</button>
+                <button className="btn btn-light col-md-1">Message</button>
+                <button className="btn btn-light col-md-1">Help</button>
+
+                <img
+                    style={{
+                    borderRadius: 50,
+                    width: 50,
+                    heigh: 50
+                }}
+                    src="https://scontent.fbkk1-6.fna.fbcdn.net/v/t31.0-8/26232458_10210703188887035_7575587764506639012_o.jpg?_nc_cat=0&_nc_eui2=v1%3AAeF8hc2cLXIGgMHZOXdGor6nOBXMB-pCoBKfzrt9hWrxg9OZ1EBGByAR4MLeGYMSd0xvDUpKKz6bXdB_QEqu5VbUQgxVme5ZYZKyrHZSp-f70g&oh=bb51940775b525a59099e03ea72930e7&oe=5B3CD15D"></img>
             </nav>
 
         )
