@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <title>Props: React</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const User = (props) => {
+      return (<h1>{props.children}</h1>);
+    }
+
+    let MyFunction = (quote)=>{
+      return (<p>{quote}</p>)
+    }
+
+    class Department extends React.Component {
+      render() {
+        return (<User>User name : {this.props.name}<br/> Age : {this.props.age} <br/>Quote : {this.props.myFunc}<br/> </User>);
+      }
+    }
+
+    class Company extends React.Component {
+      render() {
+        return (<Department name={this.props.name} age={this.props.age} myFunc={MyFunction('hello')}/>);
+      }
+    }
+
+    class App extends React.Component {
+      render() {
+        let name = "Somchai"
+        let age = 30
+        return (
+          <Company name={name} age={age}/>
+        );
+      }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById('root'));
+  </script>
+</body>
+
+</html>

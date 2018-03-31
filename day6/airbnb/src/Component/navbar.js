@@ -9,13 +9,14 @@ class Navbar extends Component {
     }
 
     componentDidMount() {
-        const url = 'https://swapi.co/api/people/1/'
+        const url = 'http://steamcommunity.com/market/priceoverview/?appid=730&currency=3&market_hash' +
+                '_name=StatTrak™%20M4A1-S%20|%20Hyper%20Beast%20(Minimal%20Wear)'
         axios
             .get(url)
             .then(res => {
                 const persons = res.data;
-                this.setState({persons: persons});
-                console.log(this.state.persons);
+                // this.setState({persons: persons});
+                console.log(res.data);
             })
     }
 
