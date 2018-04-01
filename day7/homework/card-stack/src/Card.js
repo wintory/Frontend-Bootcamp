@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './App.css'
 
 export default class Card extends Component {
@@ -7,8 +7,8 @@ export default class Card extends Component {
             <div
                 className="bgcard col-md-2"
                 style={{
-                backgroundColor: this.props.color
-            }}>card</div>
+                    backgroundColor: this.props.color
+                }} onClick={() => alert(this.props.color)}>{this.props.color}</div>
         )
     }
 }
