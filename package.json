@@ -9,6 +9,7 @@
     "node-fetch": "^2.1.1",
     "prop-types": "^15.6.1",
     "react-bootstrap": "^0.32.1",
+    "react-hide-div": "^1.0.1",
     "webpack": "^4.1.1",
     "yarn": "^1.5.1"
   }
