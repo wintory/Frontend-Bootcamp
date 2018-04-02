@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Select, Row, Col } from 'antd';
-import { log } from 'util';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
 export default class CoinRate extends Component {
 
@@ -10,8 +10,11 @@ export default class CoinRate extends Component {
         show: '',
         showRate: '',
         loading: '',
-        counter: 0
-
+        counter: 0,
+        data: [],
+        dataName: [],
+        dataTime: '',
+        graphLoading: ''
     }
 
 
@@ -34,6 +37,8 @@ export default class CoinRate extends Component {
                 });
             })
 
+        this.fetchGraph("USD")
+
         setInterval(
             () => {
 
@@ -49,7 +54,8 @@ export default class CoinRate extends Component {
                                 { name: re.bpi.USD.code, rate: re.bpi.USD.rate },
                                 ],
                                 loading: '',
-                                counter: this.state.counter + 1
+                                counter: this.state.counter + 1,
+                                dataTime: new Date().toLocaleString(),
                             });
                         })
                 }, 1500)
@@ -59,8 +65,10 @@ export default class CoinRate extends Component {
                 })
 
             }
-            , 5000);
+            , 10000);
     }
+
+
 
 
     handleChange = (value) => {
@@ -73,15 +81,50 @@ export default class CoinRate extends Component {
                     showRate: e.rate
                 })
             }
+            return null
         }
         )
+        this.fetchGraph("USD")
+    }
+
+    fetchGraph = (value) => {
+        const url = 'https://api.coindesk.com/v1/bpi/historical/close.json?currency=usd'
+        setTimeout(() => {
+            axios
+                .get(url)
+                .then(res => {
+                    const re = res.data
+                    this.setState({
+                        dataName: Object.keys(re.bpi),
+                        dataTime: new Date().toLocaleString(),
+                        graphLoading: ''
+                    })
+
+                    this.state.dataName.map(e => {
+                        this.setState({
+                            data: [...this.state.data,
+                            { 'name': e, 'price': re.bpi[e] }]
+                        })
+                        //console.log(this.state.data);
+                        return null
+                    }
+                    )
+                })
+        }, 1000)
+
+        this.setState({
+            graphLoading: 'hidden'
+        })
+
     }
 
     render() {
         const Option = Select.Option;
         return (
             <div>
-                {this.state.counter}
+                counter : {this.state.counter}
+                <br />
+                Last Update : {this.state.dataTime}
                 <div className={this.state.loading ? 'hidden' : ''}>
                     <Row>
                         <Col span={4} push={8}>
@@ -96,12 +139,35 @@ export default class CoinRate extends Component {
                             <h5>{this.state.show} : {this.state.showRate}</h5>
                         </Col>
                     </Row>
+                    <br />
+                    <br />
+                    <div className={this.state.graphLoading ? 'hidden' : ''}>
+                        <Row>
+                            <Col span={4} push={5}>
+                                <LineChart width={730} height={250} data={this.state.data}
+                                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="date" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="price" stroke="red" />
+                                </LineChart>
+                            </Col>
+                        </Row>
+                    </div>
+                    <div className={this.state.graphLoading ? '' : 'hidden'}>
+                        <Col span={4} push={11}>
+                            <div className="loader" />
+                        </Col>
+                    </div>
                 </div >
                 <div className={this.state.loading ? '' : 'hidden'}>
                     <Col span={4} push={11}>
                         <div className="loader" />
                     </Col>
                 </div>
+
             </div>
         )
     }

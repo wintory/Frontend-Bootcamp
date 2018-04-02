@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import CoinRate from './coinrate'
-import { Select, Layout } from 'antd';
+import { Layout } from 'antd';
+
 const { Header, Content, Footer } = Layout;
 
 
 class App extends Component {
+
 
 
   render() {
@@ -15,15 +16,17 @@ class App extends Component {
         <Header>
           <div className="logo" />
         </Header>
-        <Content style={{ padding: '0 50px' }}>
+        <Content style={{ padding: '50px' }}>
 
-          <div style={{ background: '#fff', padding: 24, minHeight: 500 }}>
+          <div style={{ background: '#C9EFAB', padding: 24, minHeight: 300 }}>
+            <h1 className="col-md-5 offset-5">Bitcoin Rate</h1>
             <CoinRate />
           </div>
+
         </Content>
         <Footer style={{ textAlign: 'center' }}>
-          Homework 8-1
-    </Footer>
+
+        </Footer>
       </Layout>
     );
   }
