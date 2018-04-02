@@ -37,9 +37,9 @@ export default class CoinRate extends Component {
                 });
             })
 
-        this.fetchGraph("USD")
+        await this.fetchGraph("USD")
 
-        setInterval(
+        await setInterval(
             () => {
 
                 const url = 'https://api.coindesk.com/v1/bpi/currentprice.json'
@@ -65,7 +65,7 @@ export default class CoinRate extends Component {
                 })
 
             }
-            , 10000);
+            , 15000);
     }
 
 
@@ -84,7 +84,7 @@ export default class CoinRate extends Component {
             return null
         }
         )
-        this.fetchGraph("USD")
+        this.fetchGraph(value)
     }
 
     fetchGraph = (value) => {
