@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, Col, Form, Icon, Input, Checkbox } from 'antd'
+import { Modal, Button, Col, Form, Icon, Input } from 'antd'
 const FormItem = Form.Item;
 
 export default class FormApp extends Component {
@@ -10,13 +10,11 @@ export default class FormApp extends Component {
         email: '',
         password: '',
         confirmPass: '',
-        phone: [],
-        confphone: '',
+        phone: '',
         emailStatus: 'hidden',
         passwordStatus: 'hidden',
         confStatus: 'hidden',
         phoneStatus: 'hidden',
-        i: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     }
 
     showModal = () => {
@@ -33,8 +31,8 @@ export default class FormApp extends Component {
                 this.setState({ loading: false, visible: false });
             }, 3000);
             alert('submit complete')
+            console.log(this.textInput.value);
             console.log('email : ' + this.state.email + ' , phone : ' + this.state.phone + ' , password : ' + this.state.password);
-
         } else {
             alert('please input form')
         }
@@ -80,41 +78,26 @@ export default class FormApp extends Component {
 
     chkPhone = (e) => {
 
-        this.setState({
-            phone: [...this.state.phone, e.charAt(e.length - 1)]
-        })
+        if (e.length === 10 && e.indexOf('.') === -1 && e.indexOf('/') === -1 && e.indexOf('-') === -1 && e.indexOf('%') === -1 && e.indexOf('@') === -1 && e.indexOf('#') === -1 && e.indexOf('$') === -1) {
+            this.setState({
+                phone: e,
+                phoneStatus: 'hidden'
+            })
+            console.log(this.state.phone);
 
-        this.state.phone.map(phone => {
-            if ((phone.keyCode >= 48 && phone.keyCode <= 57) || (phone.keyCode >= 96 && phone.keyCode <= 105)) {
-                this.setState({
-                    confphone: this.state.confphone + phone,
-                    phoneStatus: 'hidden'
-                })
-                console.log(phone);
-
-            } else {
-                this.setState({
-                    confphone: '',
-                    phoneStatus: ''
-                })
-                return null
-            }
-        })
-
-
-        // if (e.length === 10) {
-        //     this.setState({ phone: e, phoneStatus: 'hidden' })
-        // } else {
-        //     this.setState({
-        //         phone: '',
-        //         phoneStatus: ''
-        //     })
-        // }
+        } else {
+            this.setState({
+                phone: '',
+                phoneStatus: ''
+            })
+            return null
+        }
 
     }
 
+
     render() {
-        const { visible, loading } = this.state;
+        const { loading } = this.state;
         return (
             <Col span={4} push={20}>
                 <Button type="primary" onClick={this.showModal}>Open form</Button>
@@ -133,7 +116,7 @@ export default class FormApp extends Component {
                     <Form className="login-form">
                         <FormItem>
                             {(
-                                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" onChange={e => this.chkEmail(e.target.value)} />
+                                <Input ref={(input) => this.textInput = input} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" onChange={e => this.chkEmail(e.target.value)} />
                             )}
                             <p className={this.state.emailStatus ? 'hidden' : ''} style={{ color: 'red ' }}>invalid email form</p>
                         </FormItem>
@@ -151,7 +134,7 @@ export default class FormApp extends Component {
                         </FormItem>
                         <FormItem>
                             {(
-                                <Input prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="pnone number" onChange={e => this.chkPhone(e.target.value)} />
+                                <Input prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />} type="number" placeholder="pnone number" onChange={e => this.chkPhone(e.target.value)} />
                             )}
                             <p className={this.state.phoneStatus ? 'hidden' : ''} style={{ color: 'red ' }}>invalid phone</p>
                         </FormItem>

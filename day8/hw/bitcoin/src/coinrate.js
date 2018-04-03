@@ -127,7 +127,8 @@ export default class CoinRate extends Component {
                 Last Update : {this.state.dataTime}
                 <div className={this.state.loading ? 'hidden' : ''}>
                     <Row>
-                        <Col span={4} push={8}>
+                        <br />
+                        <Col md={4} push={8} >
 
                             <Select defaultValue="USD" style={{ width: 120 }} onChange={this.handleChange}>
                                 <Option value="USD">USD</Option>
@@ -135,7 +136,7 @@ export default class CoinRate extends Component {
                                 <Option value="GBP">GBP</Option>
                             </Select>
                         </Col>
-                        <Col span={4} push={8}>
+                        <Col md={4} push={8} >
                             <h5>{this.state.show} : {this.state.showRate}</h5>
                         </Col>
                     </Row>
