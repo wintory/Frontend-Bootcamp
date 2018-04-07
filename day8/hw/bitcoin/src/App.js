@@ -3,6 +3,7 @@ import './App.css';
 import CoinRate from './coinrate'
 import { Layout, Row, Col } from 'antd';
 import FormApp from './form'
+import Calculator from './calculator'
 
 const { Header, Content, Footer } = Layout;
 
@@ -15,6 +16,7 @@ class App extends Component {
         <Header>
           <div className="logo" />
           <FormApp />
+          <Calculator />
         </Header>
         <Content style={{ padding: '50px' }}>
           <Row>
