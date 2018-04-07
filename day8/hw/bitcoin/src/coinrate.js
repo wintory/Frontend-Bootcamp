@@ -103,7 +103,7 @@ export default class CoinRate extends Component {
                     this.state.dataName.map(e => {
                         this.setState({
                             data: [...this.state.data,
-                            { 'name': e, 'price': re.bpi[e] }]
+                            { 'date': e, 'price': re.bpi[e] }]
                         })
                         //console.log(this.state.data);
                         return null
