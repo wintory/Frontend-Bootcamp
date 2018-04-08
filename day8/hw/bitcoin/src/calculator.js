@@ -5,12 +5,14 @@ const TextArea = Input
 
 class Calculator extends Component {
     state = {
-        result: '',
+        result: 0,
         number: [],
         operation: [],
         visible: false,
         value: ''
     }
+
+
 
     showModal = () => {
         this.setState({
@@ -31,10 +33,12 @@ class Calculator extends Component {
     }
 
     addNumber = (e) => {
+        let num = e.parseInt()
         this.setState({
-            number: [...this.state.number, e]
+            number: [...this.state.number, e],
+            result: this.state.result + e
         })
-        console.log(this.state.number);
+
     }
 
     addValue = (e) => {
@@ -57,7 +61,7 @@ class Calculator extends Component {
                     >
                         <div className="col-md-6">
                             <div>
-                                <input type="text" value={this.state.value} />
+                                <input type="text" value={this.state.result} />
                             </div>
                             <ButtonGroup>
                                 <Button onClick={() => { this.addNumber('1') }}>(</Button>

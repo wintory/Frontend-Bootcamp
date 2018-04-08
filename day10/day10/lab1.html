@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="lib.js"></script>
+  <title>Redux from scratch</title>
+</head>
+
+<body>
+
+  <p id="root">aa</p>
+  <button onclick="thisplus(1)">plus 1</button>
+  <button onclick="thisminus(1)">minus 1</button>
+
+  <script type="text/javascript">
+    'use strict';
+
+
+    function thisminus(number) {
+      myStore.dispatch(decrementNumber(number))
+    }
+
+    function thisplus(number) {
+      myStore.dispatch(incrementNumber(number))
+    }
+
+    // -----------------------------------------------------------------
+    // 1. สร้าง Action
+
+
+    function incrementNumber(number) {
+      return { type: 'INCREMENT', amount: number }
+    }
+
+    function decrementNumber(number) {
+      return { type: 'DECREMENT', amount: number }
+    }
+
+    function multiNumber(number) {
+      return { type: 'MULTI', amount: number }
+    }
+
+    function divideNumber(number) {
+      return { type: 'DIVIDE', amount: number }
+    }
+
+    // -----------------------------------------------------------------
+    // 2. สร้าง Reducer
+
+
+    function myReducer(state = { count: 0 }, action) {
+      switch (action.type) {
+        case 'INCREMENT': return { count: state.count + action.amount }
+        case 'DECREMENT': return { count: state.count - action.amount }
+        case 'MULTI': return { count: state.count * action.amount }
+        case 'DIVIDE': return { count: state.count / action.amount }
+        default: return state
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // 3. สร้าง Store
+
+    const myStore = createStore(myReducer);
+
+    // -----------------------------------------------------------------
+    // 4. Subcribe listener
+
+    function Listener() {
+      console.log(myStore.getState());
+      console.log('=======================');
+    }
+
+    function getShow() {
+      let thisstore = myStore.getState()
+      document.getElementById('root').innerHTML = thisstore.count
+    }
+
+    myStore.subscribe(Listener)
+    myStore.subscribe(getShow)
+
+
+    // -----------------------------------------------------------------
+    // 5. Dispatch Action
+
+    myStore.dispatch(incrementNumber(100))
+    myStore.dispatch(decrementNumber(5))
+    myStore.dispatch(multiNumber(2))
+    myStore.dispatch(divideNumber(2))
+  </script>
+</body>
+
+</html>

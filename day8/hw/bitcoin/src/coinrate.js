@@ -88,7 +88,7 @@ export default class CoinRate extends Component {
     }
 
     fetchGraph = (value) => {
-        const url = 'https://api.coindesk.com/v1/bpi/historical/close.json?currency=usd'
+        const url = 'https://api.coindesk.com/v1/bpi/historical/close.json?currency=' + value
         setTimeout(() => {
             axios
                 .get(url)
@@ -147,7 +147,7 @@ export default class CoinRate extends Component {
                             <Col span={4} push={5}>
                                 <LineChart width={730} height={250} data={this.state.data}
                                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <CartesianGrid strokeDasharray='5 5' />
                                     <XAxis dataKey="date" />
                                     <YAxis />
                                     <Tooltip />
